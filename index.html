@@ -1,0 +1,242 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore a world of culinary delights at Delicious Bites. Find delicious recipes, ingredients, and cooking tips."
+    />
+    <title>Delicious Bites: Exploring Culinary Delights</title>
+    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="CSS/all.min.css" />
+    <link rel="stylesheet" href="CSS/style.css" />
+  </head>
+  <body>
+    <!-- Pre loader from this site url: https://cssload.net/en/spinners -->
+    <div class="loading d-none">
+      <div class="windows8">
+        <div class="wBall" id="wBall_1">
+          <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_2">
+          <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_3">
+          <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_4">
+          <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_5">
+          <div class="wInnerBall"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Side Nav Bar -->
+    <nav
+      class="side-nav position-fixed d-flex top-0 left-0 animate-content-side-nav"
+      style="left: 0"
+    >
+      <div
+        class="content-side-nav p-4 d-flex flex-column justify-content-between"
+      >
+        <div class="up overflow-hidden">
+          <ul class="list-unstyled">
+            <li
+              class="py-2 position-relative"
+              style="top: 0px"
+              onclick="hideShowSection('search-section')"
+            >
+              Search
+            </li>
+            <li
+              class="py-2 position-relative"
+              style="top: 0px"
+              onclick="fetchCategories()"
+            >
+              Categories
+            </li>
+            <li
+              class="py-2 position-relative"
+              style="top: 0px"
+              onclick="fetchArea()"
+            >
+              Area
+            </li>
+            <li
+              class="py-2 position-relative"
+              style="top: 0px"
+              onclick="fetchIngredients()"
+            >
+              Ingredients
+            </li>
+            <li
+              class="py-2 position-relative"
+              style="top: 0px"
+              onclick="hideShowSection('contact-section')"
+            >
+              Contact Us
+            </li>
+          </ul>
+        </div>
+        <div class="down p-2">
+          <div class="three-icons d-flex justify-content-center">
+            <i
+              class="fa-brands fa-facebook mx-2 my-1"
+              style="color: #f9f6f6"
+            ></i>
+            <i
+              class="fa-brands fa-twitter mx-2 my-1"
+              style="color: #f9f6f6"
+            ></i>
+            <i class="fa-solid fa-globe mx-2 my-1" style="color: #f9f6f6"></i>
+          </div>
+          <div class="rights text-center">
+            <p>Copyright &copy; 2019 All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="open-close-side-nav d-flex flex-column justify-content-between text-center px-2 py-4"
+      >
+        <img src="Images/logo.png" alt="Delicious Bites Logo" />
+        <i
+          class="fa-solid fa-align-justify fa-2x"
+          style="color: #0d0d0d"
+          id="closeOpen"
+        ></i>
+        <!-- <i class="fa-solid fa-x fa-2x" style="color: #0d0d0d;"></i> -->
+        <div class="d-flex flex-column justify-content-between">
+          <i class="fa-solid fa-globe py-1" style="color: #0d0d0d"></i>
+          <i class="fa-solid fa-share-nodes" style="color: #0d0d0d"></i>
+        </div>
+      </div>
+    </nav>
+    <!-- Search Section -->
+    <section class="search-section h-100" id="search">
+      <h1 class="text-center mt-3 title px-5">
+        Delicious Bites: Exploring Culinary Delights
+      </h1>
+      <div class="container py-5 d-flex">
+        <input
+          type="text"
+          class="form-control bg-transparent mx-3 my-4"
+          placeholder="Search By Name"
+          id="SearchByName"
+        />
+        <input
+          type="text"
+          class="form-control bg-transparent mx-3 my-4"
+          placeholder="Search By First Letter"
+          id="SearchByLetter"
+        />
+      </div>
+    </section>
+    <!-- Categories Section  & Display Meals-->
+    <section class="categories-section vh-100 d-none">
+      <div class="container py-5">
+        <div class="row g-4" id="display&cat"></div>
+      </div>
+    </section>
+    <!-- Area Section -->
+    <section class="area-section h-100 d-none">
+      <div class="container py-5">
+        <div class="row" id="area"></div>
+      </div>
+    </section>
+    <!-- Ingredients Section -->
+    <section class="ingredients-section h-100 d-none">
+      <div class="container py-5">
+        <div class="row" id="ingredients"></div>
+      </div>
+    </section>
+    <!-- Contact Us Section -->
+    <section
+      class="contact-section d-flex justify-content-center align-content-center h-100 d-none"
+    >
+      <div class="container my-5 h-100 w-75 text-center">
+        <div class="row">
+          <div class="col-md-6 my-4">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Enter Your Name"
+              oninput="changeButtonStatus()"
+            />
+            <div class="alert alert-danger my-4 d-none">
+              Special characters and numbers not allowed
+            </div>
+          </div>
+          <div class="col-md-6 my-4">
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              placeholder="Enter Your Email"
+              oninput="changeButtonStatus()"
+            />
+            <div class="alert alert-danger my-4 d-none">
+              Email not valid *exemple@yyy.zzz
+            </div>
+          </div>
+          <div class="col-md-6 my-4">
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              placeholder="Enter Your Phone"
+              oninput="changeButtonStatus()"
+            />
+            <div class="alert alert-danger my-4 d-none">
+              Enter valid Phone Number
+            </div>
+          </div>
+          <div class="col-md-6 my-4">
+            <input
+              type="number"
+              class="form-control"
+              id="age"
+              placeholder="Enter Your Age"
+              oninput="changeButtonStatus()"
+            />
+            <div class="alert alert-danger my-4 d-none">Enter valid age</div>
+          </div>
+          <div class="col-md-6 my-4">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Enter Your Password"
+              oninput="changeButtonStatus()"
+            />
+            <div class="alert alert-danger my-4 d-none">
+              Enter valid password *Minimum eight characters, at least one
+              letter and one number:*
+            </div>
+          </div>
+          <div class="col-md-6 my-4">
+            <input
+              type="password"
+              class="form-control"
+              id="repassword"
+              placeholder="Repassword"
+              oninput="changeButtonStatus()"
+            />
+            <div class="alert alert-danger my-4 d-none">
+              Enter valid repassword
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-outline-danger px-2 my-3" disabled id="submitButton">Submit</button>
+      </div>
+    </section>
+    <section class="meal-details d-none">
+      <div class="container py-5">
+        <div class="row g-4" id="mealDetails"></div>
+      </div>
+    </section>
+    <script src="JS/main.js"></script>
+  </body>
+</html>
