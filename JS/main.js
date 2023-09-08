@@ -360,12 +360,18 @@ function returnIngredientForSingleMeal(data) {
 }
 
 function returnTagsForSingleMeal(data) {
-  let tags = data.strTags.split(",");
   let allTags = ``;
-  for (let i = 0; i < tags.length; i++) {
-    allTags += ` <li class="alert alert-light m-2 p-1">${tags[i]}</li>\n`;
+  if(data.strTags !== null){
+    let tags = data.strTags.split(",");
+    for (let i = 0; i < tags.length; i++) {
+      allTags += ` <li class="alert alert-light m-2 p-1">${tags[i]}</li>\n`;
+      return allTags;
+    }
   }
-  return allTags;
+  else
+  {
+    return allTags;
+  }
 }
 
 
